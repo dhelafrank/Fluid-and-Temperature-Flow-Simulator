@@ -1,2 +1,11 @@
 #!/bin/bash
-sh -c && cd ./core && python3 -m venv vobf && source ./vobf/bin/activate && pip install -r requirements.txt && python3 main.py
+clear
+echo "see README.md"
+echo "you are here: $(pwd)"
+cd ./core
+echo "you are now here: $(pwd)"
+echo "creating virtual enviroment..."
+python3 -m venv vobf && source ./vobf/bin/activate
+echo "you can deactivate virtual enviroment by executing \"deactivate\"" 
+pip install -r requirements.txt -v
+python3 main.py
