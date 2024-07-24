@@ -5,7 +5,8 @@ echo "you are here: $(pwd)"
 cd ./core
 echo "you are now here: $(pwd)"
 echo "creating virtual enviroment..."
-python3 -m venv vobf && source ./vobf/bin/activate
+python3 -m venv ../venv && source ../venv/bin/activate
+echo "installing requirements..."
 echo "you can deactivate virtual enviroment by executing \"deactivate\"" 
 pip install -r requirements.txt -v
 python3 main.py

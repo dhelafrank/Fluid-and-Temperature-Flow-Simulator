@@ -1,14 +1,21 @@
-"""
-This project simulates the evolution of fluid flow and temperature distribution in a 2D domain over time. 
-Specifically, it solves a set of partial differential equations (PDEs) that describe the fluid dynamics and heat transfer, 
-typically associated with natural convection phenomena.
-"""
+import time
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
-print(f'This project simulates the evolution of fluid flow and temperature distribution in a 2D domain over time.\nSpecifically, it solves a set of partial differential equations (PDEs) that describe the fluid dynamics and heat transfer,\ntypically associated with natural convection phenomena.')
+from datetime import datetime
+import os
+import sys
+
+# Start timing
+start_time = time.time()
+now = datetime.now().strftime('%Y%m%d_%H%M%S')  # Timestamp for filenames
+
+input('\nThis project simulates the evolution of fluid flow and temperature distribution in a 2D domain over time.\nSpecifically, it solves a set of partial differential equations (PDEs) that describe the fluid dynamics and heat transfer,\ntypically associated with natural convection phenomena, and saves the plot as images.\n\nPress enter to continue')
+
 # Define the grid parameters
-nx, ny = 50, 50  # Number of grid points
+input("\nNote: The higher your grid points value, the longer time it takes to plot\nPress enter to continue")
+nx = int(input("\nEnter number of grid points in the x direction: "))  # Number of grid points in the x-direction
+ny = int(input("Enter number of grid points in the y direction: "))  # Number of grid points in the y direction
 Lx, Ly = 1.0, 1.0  # Domain size
 dx, dy = Lx / (nx - 1), Ly / (ny - 1)  # Grid spacing
 
@@ -76,22 +83,42 @@ def pde_system(t, y):
 t_eval = np.linspace(t0, tf, nt)
 
 # Solve the system of PDEs
+print("Starting PDE solver...")
 solution = solve_ivp(pde_system, [t0, tf], initial_conditions, t_eval=t_eval, method='RK45')
+print("PDE solver finished.")
 
 # Reshape and extract the solution
 U_sol = solution.y[:nx*ny].reshape((nx, ny, -1))
 V_sol = solution.y[nx*ny:2*nx*ny].reshape((nx, ny, -1))
 Theta_sol = solution.y[2*nx*ny:].reshape((nx, ny, -1))
 
-# Plot the results
+# Create output directory if it doesn't exist
+output_dir = '../plots'
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
+
+# Plot the results and save as image files
+print("Saving plots...")
+velPlotLocation = f'{output_dir}/{now}_velocity_u.png'
 plt.figure()
 plt.contourf(U_sol[:, :, -1], cmap='jet')
 plt.colorbar()
 plt.title('Velocity U')
-plt.show()
+plt.savefig(velPlotLocation)  # Save the plot as an image file
+plt.close()  # Close the plot to free up memory
 
+tempPlotLocation = f'{output_dir}/{now}_temperature_theta.png'
 plt.figure()
 plt.contourf(Theta_sol[:, :, -1], cmap='jet')
 plt.colorbar()
 plt.title('Temperature Theta')
-plt.show()
+plt.savefig(tempPlotLocation)  # Save the plot as an image file
+plt.close()  # Close the plot to free up memory
+
+# End timing
+end_time = time.time()
+print(f"\nPlots saved as images:\n{velPlotLocation}\n{tempPlotLocation}")
+print(f"Total time taken: {end_time - start_time:.2f} seconds")
+
+# Exit the process
+sys.exit()
