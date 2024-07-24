@@ -13,10 +13,11 @@ now = datetime.now().strftime('%Y%m%d_%H%M%S')  # Timestamp for filenames
 input('\nThis project simulates the evolution of fluid flow and temperature distribution in a 2D domain over time.\nSpecifically, it solves a set of partial differential equations (PDEs) that describe the fluid dynamics and heat transfer,\ntypically associated with natural convection phenomena, and saves the plot as images.\n\nPress enter to continue')
 
 # Define the grid parameters
-input("\nNote: The higher your grid points value, the longer time it takes to plot\nPress enter to continue")
 nx = int(input("\nEnter number of grid points in the x direction: "))  # Number of grid points in the x-direction
 ny = int(input("Enter number of grid points in the y direction: "))  # Number of grid points in the y direction
-Lx, Ly = 1.0, 1.0  # Domain size
+Lx = int(input("\nEnter domain size in x axis: "))
+Ly = int(input("Enter domain size in y axis: "))
+input(f"\n\n\nValues Summary:\nnx\t\t{nx} \nny\t\t{ny} \nLx\t\t{Lx} \nLy\t\t{Ly}\n\nNote:The higher your grid points and domain size values, the longer time it takes to plot\nPress enter to continue or Ctrl + C to cancel")
 dx, dy = Lx / (nx - 1), Ly / (ny - 1)  # Grid spacing
 
 # Define the time parameters
