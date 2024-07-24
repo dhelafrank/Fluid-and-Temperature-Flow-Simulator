@@ -1,4 +1,7 @@
 # Getting Started
+This project simulates the evolution of fluid flow and temperature distribution in a 2D domain over time. 
+Specifically, it solves a set of partial differential equations (PDEs) that describe the fluid dynamics and heat transfer, 
+typically associated with natural convection phenomena.
 ## 1 Setup Virtual Enviroments 
 It is neccesary to setup virtual enviroment for this project so the packages installed do not conflict with the global modules or packages.
 
