@@ -3,6 +3,8 @@
 It is neccesary to setup virtual enviroment for this project so the packages installed do not conflict with the global modules or packages.
 
 ### 1.0 (Linux)
+#### Auto Setup: `sudo chmod +x ./linux-setup && ./linux-setup`
+#### Manual Setup:
 - Navigate to the project's root folder: `cd ./core`
 - Create virtual enviroment by executing the command: `python3 -m venv obf` where `obf` is the name of your virtual enviroment.
 - Switch to virtual enviroment by executing: `source obf/bin/activate`
