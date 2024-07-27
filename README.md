@@ -3,6 +3,8 @@ This project simulates the evolution of fluid flow and temperature distribution 
 Specifically, it solves a set of partial differential equations (PDEs) that describe the fluid dynamics and heat transfer, 
 typically associated with natural convection phenomena.
 
+#### See [Explainer]("https://github.com/dhelafrank/Fluid-and-Temperature-Flow-Simulator/blob/master/EXPLAINER.md)
+
 ## 1. Installation
 To get started make sure you have `Python (v3.5^)` and `Pip` Cofigure on your machine.
 

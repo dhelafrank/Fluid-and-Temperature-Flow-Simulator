@@ -100,25 +100,24 @@ if not os.path.exists(output_dir):
 
 # Plot the results and save as image files
 print("Saving plots...")
-velPlotLocation = f'{output_dir}/{now}_velocity_u.png'
-plt.figure()
-plt.contourf(U_sol[:, :, -1], cmap='jet')
-plt.colorbar()
-plt.title('Velocity U')
-plt.savefig(velPlotLocation)  # Save the plot as an image file
-plt.close()  # Close the plot to free up memory
 
-tempPlotLocation = f'{output_dir}/{now}_temperature_theta.png'
-plt.figure()
-plt.contourf(Theta_sol[:, :, -1], cmap='jet')
-plt.colorbar()
-plt.title('Temperature Theta')
-plt.savefig(tempPlotLocation)  # Save the plot as an image file
-plt.close()  # Close the plot to free up memory
+plt.figure(figsize=(10, 6))
+# Ensure there is at least one step
+step = max(1, ny // 10) 
+for i in range(0, ny, step):  
+    plt.plot(t_eval, Theta_sol[nx//2, i, :], label=f'Y = {i*dy:.2f}', color='black', linestyle='-', marker='o')
+plt.xlabel('Dimensionless time τ')
+plt.ylabel('Dimensionless temperature θ')
+plt.title('Transient temperatures at various positions of Y for air')
+plt.legend(loc='best', frameon=False)
+plt.grid(True)
+plot_filename = f'{output_dir}/{now}_transient_temperatures_bw.png'
+plt.savefig(plot_filename)  # Save the figure to a file
+plt.show()
 
 # End timing
 end_time = time.time()
-print(f"\nPlots saved as images:\n{velPlotLocation}\n{tempPlotLocation}")
+print(f"\nPlot saved as image:\n{plot_filename}")
 print(f"Total time taken: {end_time - start_time:.2f} seconds")
 
 # Exit the process
